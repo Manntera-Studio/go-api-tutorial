@@ -2,8 +2,10 @@
 本リポジトリはGo言語を使ったAPIの構築手順を学ぶチュートリアルです。
 
 ## Lessons
-1. Lesson1: とにかくAPIを立ち上げることを目指す coming soon...
-1. Lesson2: モジュール化 coming soon...
+1. Lesson1: とにかくAPIを立ち上げることを目指す
+1. Lesson2: パッケージ化 coming soon...
+    - 構造体
+    - 自作パッケージを読み込む
 1. Lesson3: 単体テスト coming soon...
 1. Lesson4: 大量のリクエストを捌けるようにする coming soon...
     - Nginx
@@ -23,6 +25,11 @@
 ## 注意事項
 本チュートリアルは version 1.16 以降を想定しています。
 1.15 位前を使う場合は、適宜読み替えてください。
+
+また、環境構築は Docker を使って行う想定です。
+あらかじめ `docker` および `docker-compose` コマンドが使える状態を用意してください。
+
+Docker を使わない場合は、各章の `Dockerfile` や `docker-compose.yml` を参考に環境構築を行ってください。
 
 ## その他のドキュメント
 ### 公式チュートリアル
