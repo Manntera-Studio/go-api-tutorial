@@ -1,0 +1,23 @@
+version: '3'
+services:
+  pxoxy:
+    container_name: proxy
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - nginx1
+      - nginx2
+  
+  nginx1:
+    container_name: nginx1
+    image: nginx
+    volumes:
+      - ./nginx1:/usr/share/nginx/html
+  nginx2:
+    container_name: nginx2
+    image: nginx
+    volumes:
+      - ./nginx2:/usr/share/nginx/html
