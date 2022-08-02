@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    image: golang:1.16
+    container_name: "app"
+    volumes:
+      - ./backend:/go/src/app
+    working_dir: /go/src/app
+    environment:
+      - Asia/Tokyo
+    ports:
+      - 8080:8080
+    tty: true
+    command: /bin/bash -c "go run main.go"
+  nginx:
+    container_name: proxy
+    image: nginx
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
+    environment:
+      - Asia/Tokyo
+    ports:
+      - 80:80
+    depends_on:
+      - "app"

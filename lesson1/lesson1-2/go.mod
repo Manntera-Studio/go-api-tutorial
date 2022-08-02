@@ -1,4 +1,4 @@
-module app/lesson1.2
+module app/lesson1-2
 
 go 1.16
 
