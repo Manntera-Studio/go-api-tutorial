@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  app:
+    container_name: app
+    build: ./app
+    tty: true
+    ports:
+      - 8080:8080
+    env_file:
+      - ./mysql/.env
+    depends_on:
+      - db
+    volumes:
+      - ./app:/go/src/app
+    working_dir: /go/src/app
+    environment:
+      TZ: Asia/Tokyo
+    #command: /bin/bash -c "go run main.go"
+  db:
+    container_name: db
+    build: ./mysql
+    tty: true
+    ports:
+      - 3306:3306
+    env_file:
+      - ./mysql/.env
+    volumes:
+      - ./mysql/lib/:/var/lib/mysql/
+      - ./mysql/init:/docker-entrypoint-initdb.d
