@@ -15,7 +15,7 @@ services:
     working_dir: /go/src/app
     environment:
       TZ: Asia/Tokyo
-    #command: /bin/bash -c "go run main.go"
+    command: /bin/bash -c "go run main.go"
   db:
     container_name: db
     build: ./mysql
