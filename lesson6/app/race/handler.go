@@ -113,7 +113,7 @@ func Insert(c echo.Context) error {
 	}
 
 	drid, err = strconv.Atoi(params["drid"][0])
-    date := params["date"][0]
+	date := params["date"][0]
 	stime, err = time.Parse(layout, fmt.Sprintf("%v %v", date, params["stime"][0]))
 	etime, err = time.Parse(layout, fmt.Sprintf("%v %v", date, params["etime"][0]))
 	venue := params["venue"][0]
