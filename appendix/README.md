@@ -164,13 +164,15 @@ $ gcloud app logs tail -s default
 これで表示された URL、ここでは、
 https://hogehoge.df.r.appspot.com
 にアクセスすれば、立ち上げたアプリを叩くことができる。
-![link text](images/app.png)
+
+![](images/app.png)
 
 ちなみにデプロイには Cloud Build API が必要になる。
 もし無効状態になっている場合は、デプロイに失敗し、API を有効化せよというエラーメッセージが出る。
 エラーメッセージの案内に従って Cloud Build API を有効化する。
 https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com
-![link text](images/enable_cloudbuildapi.png)
+
+![](images/enable_cloudbuildapi.png)
 
 > **Note**
 > Cloud Build API の有効化にはプロジェクトと請求先アカウントの紐づけが必要になる。
@@ -196,19 +198,24 @@ Cloud IAP とは、ウェブサイトへのリクエストの中間に入って�
 https://console.cloud.google.com/security/iap/getStarted
 
 無効になっている場合は、画面の案内に従って、API を有効にする。
+
 ![](images/iap-01.png)
 
 有効化できたら、「同意画面を構成」をクリック。
+
 ![](images/iap-02.png)
 
 必要事項を適当に入力する。
 このあたりの設定は以下の記事が参考になる。
-[IAP で保護されたリソースの認証をスクリプトで突破する](https://zenn.dev/sugasuga/articles/c8be86a1d6ac71)
+
+- [IAP で保護されたリソースの認証をスクリプトで突破する](https://zenn.dev/sugasuga/articles/c8be86a1d6ac71)
+- [Cloud IAP\(Identity\-Aware Proxy\)で GAE に ID 認証をかける \| ヤマログ](https://yamavlog.com/traial-gcp-cloud-iap/?amp=1)
 
 > **Note**
 > User Type は GCP で組織を導入していない限り「外部」しか選べない。
 
 設定出来たら対象アプリの IAP のトグルを押して有効化する。
+
 ![](images/iap-03.png)
 
 有効化後にブラウザからアプリケーションにアクセスしようとするとログイン画面が表示される。
@@ -224,17 +231,21 @@ curl などでアクセスしようとしても、失敗して空文字が返っ
 
 まずは、アプリにアクセスする際に使用するサービスアカウントキーを作成する。
 「IAM と管理」から「サービスアカウント」に移動する。
+
 ![](images/iam-01.png)
 
 使用するサービスアカウントをクリックする。
 ここでは、サービスアカウントは名前が `AppEngine default service account` (AppEngine を作った際に自動で作成されたもの)を使うことにする。
+
 ![](images/iam-02.png)
 
 > **Note**
 > 場面に応じて適切なサービスアカウントの作成を行うこと。
 
 「新しい鍵を作成」を選択する。
+
 ![](images/ima-03.png)
+
 キーのタイプは JSON を選択する。
 
 キーを新規作成すると credential 情報が書かれた json ファイル(おそらく `serviceaccount名-ハッシュ値.json` というファイル名)がダウンロードされるので、これを環境変数に登録する。
@@ -255,17 +266,20 @@ $ go run client.go
 
 次にアクセス可能なユーザを設定する。
 右サイドメニューの「プリンシパルを追加」からアクセス可能なサービスアカウントを追加する。
+
 ![](images/iap-03.png)
 
 新しいプリンシパルには、アクセスを許可するサービスアカウントを、ロールには「IAP-secured Web App User」を選択する。
 ここで設定するサービスアカウントは、先ほどキーを作成したサービスアカウントを指定する。
 
 このあたりの設定も以下の記事が参考になる。
-[IAP で保護されたリソースの認証をスクリプトで突破する](https://zenn.dev/sugasuga/articles/c8be86a1d6ac71)
+
+- [IAP で保護されたリソースの認証をスクリプトで突破する](https://zenn.dev/sugasuga/articles/c8be86a1d6ac71)
+- [Cloud IAP\(Identity\-Aware Proxy\)で GAE に ID 認証をかける \| ヤマログ](https://yamavlog.com/traial-gcp-cloud-iap/?amp=1)
 
 CLI へのサービスアカウントの紐づけ方法はこのあたりが参考になる。
 
-- https://qiita.com/zaru/items/a419f306385f240e4fe6
+- [gcloud コマンドをサーバにインストールして認証する \- Qiita](https://qiita.com/zaru/items/a419f306385f240e4fe6)
 - https://cloud.google.com/iam/docs/creating-managing-service-account-keys?hl=ja
 
 #### プログラムから IAP を設定したアプリにアクセスする
@@ -291,7 +305,9 @@ func main()  {
 ```
 
 クライアント ID は Identity-Aware Proxy のアプリケーションタブ、3 点メニューから 「OAuth 構成に移動」で確認できる。
+
 ![](images/iap-04.png)
+
 ![](images/iap-05.png)
 
 サービスアカウントではなくクライアント ID であることに注意
