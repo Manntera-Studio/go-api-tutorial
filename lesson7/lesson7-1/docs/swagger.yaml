@@ -1,0 +1,58 @@
+basePath: /api/v1
+definitions:
+  main.HTTPError:
+    properties:
+      code:
+        type: string
+    type: object
+  main.Student:
+    properties:
+      class:
+        type: string
+      grade:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample swagger server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /classes/{grade}/students:
+    get:
+      consumes:
+      - application/json
+      description: get students in a class
+      parameters:
+      - description: Grade
+        in: path
+        name: grade
+        required: true
+        type: integer
+      - description: Class
+        in: query
+        name: class
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.Student'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.HTTPError'
+      summary: get students
+swagger: "2.0"

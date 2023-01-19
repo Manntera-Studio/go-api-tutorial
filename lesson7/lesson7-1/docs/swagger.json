@@ -1,0 +1,88 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample swagger server.",
+        "title": "Swagger Example API",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/classes/{grade}/students": {
+            "get": {
+                "description": "get students in a class",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "get students",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Grade",
+                        "name": "grade",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Class",
+                        "name": "class",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/main.Student"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/main.HTTPError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.HTTPError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.Student": {
+            "type": "object",
+            "properties": {
+                "class": {
+                    "type": "string"
+                },
+                "grade": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

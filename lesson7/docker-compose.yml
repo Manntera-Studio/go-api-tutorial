@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  lesson7-1:
+    image: golang:1.17
+    container_name: "lesson7-1"
+    volumes:
+      - ./lesson7-1:/go/src/app
+    working_dir: /go/src/app
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 8080:8080
+    tty: true
+  lesson7-2-app:
+    container_name: "lesson7-2-app"
+    build: ./lesson7-2/app
+    tty: true
+    ports:
+      - 8081:8081
+    env_file:
+      - ./lesson7-2/mysql/.env
+    depends_on:
+      - "lesson-7-2-db"
+    volumes:
+      - ./lesson7-2/app:/go/src/app
+    working_dir: /go/src/app
+    environment:
+      TZ: Asia/Tokyo
+    command: /bin/bash -c "swag i && go run main.go"
+  lesson-7-2-db:
+    container_name: "lesson7-2-db"
+    build: ./lesson7-2/mysql
+    tty: true
+    ports:
+      - 3306:3306
+    env_file:
+      - ./lesson7-2/mysql/.env
+    volumes:
+      - ./lesson7-2/mysql/lib/:/var/lib/mysql/
+      - ./lesson7-2/mysql/init:/docker-entrypoint-initdb.d
+  lesson7-3-generator:
+    image: openapitools/openapi-generator-cli:v6.2.1
+    container_name: "lesson7-3-generator"
+    volumes:
+      - ./lesson7-3:/local
+    environment:
+      TZ: Asia/Tokyo
+  lesson7-3-app:
+    build: ./lesson7-3/server
+    container_name: "lesson7-3-app"
+    volumes:
+      - ./lesson7-3/app:/go/src/app
+    working_dir: /go/src/app
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 8082:8082
+    tty: true
