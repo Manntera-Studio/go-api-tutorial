@@ -4,14 +4,14 @@
 
 ## Lessons
 
-1. Lesson1: とにかく API を立ち上げることを目指す
+1. [Lesson1: とにかく API を立ち上げることを目指す](./lesson1/)
    1. Hello world
    1. API サーバの構築
 1. Lesson2: パッケージ化 coming soon...
    - 構造体
    - 自作パッケージを読み込む
 1. Lesson3: 単体テスト coming soon...
-1. Lesson4: 大量のリクエストを捌けるようにする
+1. [Lesson4: 大量のリクエストを捌けるようにする](./lesson4/)
    1. Nginx でリバースプロキシをする
    1. Nginx でリクエストの振り分けをする
    1. ロードバランシングで負荷分散させる
@@ -19,17 +19,19 @@
    - IP アドレスや Cookie によるアクセス制御
    - Basic 認証
    - A/B Test
-1. Lesson6: データベースと連携する
+1. [Lesson6: データベースと連携する](./lesson6/)
    1. データベースの下準備
    1. API の実装
-1. Lesson7: API 仕様書を書く coming soon...
-   - Swagger
+1. [Lesson7: API 仕様書を書く](./lesson7/)
+   1. ソースコードコメントから OpenAPI ドキュメントを自動生成する
+   1. 複雑な API のドキュメントを書く
+   1. OpenAPI ドキュメントからソースコードを自動生成する
 1. Lesson8: スケールアウト coming soon...
    - Kubernetes
 1. Lesson9: 監視設定 coming soon...
    - Prometheus, Grafana, Alertmanager
 
-### 番外編(Appendix)
+### [番外編(Appendix)](./appendix/)
 
 - GAE へのデプロイ
 - ビルド coming soon...

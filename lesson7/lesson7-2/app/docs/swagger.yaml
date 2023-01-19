@@ -1,0 +1,202 @@
+basePath: /
+definitions:
+  main.APIMessage:
+    properties:
+      message:
+        type: string
+    type: object
+  race.Race:
+    properties:
+      dayraceid:
+        type: integer
+      endtime:
+        type: string
+      id:
+        type: integer
+      racedate:
+        type: string
+      starttime:
+        type: string
+      temperature:
+        type: number
+      updated:
+        type: string
+      venuce:
+        type: string
+    type: object
+host: localhost:8081
+info:
+  contact: {}
+  description: Racing Database
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/mit-license.php
+  title: Racing Database API
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: select data from database
+      parameters:
+      - description: Id
+        in: query
+        name: id
+        type: integer
+      - description: DayRaceId
+        in: query
+        name: drid
+        type: integer
+      - description: RaceDate
+        format: date
+        in: query
+        name: date
+        type: string
+      - description: StartTime
+        in: query
+        name: stime
+        type: string
+      - description: EndTime
+        in: query
+        name: etime
+        type: string
+      - description: Venue
+        in: query
+        name: venue
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/race.Race'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+      summary: select data
+    post:
+      description: insert data from database
+      parameters:
+      - description: DayRaceId
+        in: query
+        name: drid
+        required: true
+        type: integer
+      - description: RaceDate
+        format: date
+        in: query
+        name: date
+        required: true
+        type: string
+      - description: StartTime
+        in: query
+        name: stime
+        required: true
+        type: string
+      - description: Venue
+        in: query
+        name: venue
+        required: true
+        type: string
+      - description: EndTime
+        in: query
+        name: etime
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+      summary: insert data
+  /{id}:
+    delete:
+      description: update data from database
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+      summary: update data
+    put:
+      description: update data from database
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: DayRaceId
+        in: query
+        name: drid
+        type: integer
+      - description: RaceDate
+        in: query
+        name: date
+        type: string
+      - description: StartTime
+        in: query
+        name: stime
+        type: string
+      - description: EndTime
+        in: query
+        name: etime
+        type: string
+      - description: Temperature
+        in: query
+        name: temperature
+        type: number
+      - description: Venue
+        in: query
+        name: venue
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.APIMessage'
+      summary: update data
+swagger: "2.0"
